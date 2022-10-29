@@ -1,4 +1,4 @@
-package com.example.composestudy
+package com.example.composestudy.effect
 
 import android.widget.Toast
 import androidx.compose.foundation.layout.Arrangement

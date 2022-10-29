@@ -1,24 +1,21 @@
 package com.example.composestudy
 
-import android.app.Activity
 import android.os.Bundle
-import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.*
-import androidx.compose.material.Button
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
-import androidx.compose.runtime.*
-import androidx.compose.ui.Alignment
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.compositionLocalOf
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.example.composestudy.map.GoogleMapTest
+import com.example.composestudy.effect.LaunchedEffectTest
+import com.example.composestudy.map.NaverMapTest
+import com.example.composestudy.map.NaverMapTest2
 import com.example.composestudy.ui.theme.ComposeStudyTheme
 
 class MainActivity : ComponentActivity() {
@@ -38,7 +35,10 @@ class MainActivity : ComponentActivity() {
                     // produceState
                     // derivedStateOf
                     // snapshotFlow
-                    GoogleMapTest()
+//                    LaunchedEffectTest()
+//                    GoogleMapTest()
+//                    NaverMapTest()
+                    NaverMapTest2()
                 }
             }
         }

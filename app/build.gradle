@@ -5,6 +5,8 @@ plugins {
 Properties properties = new Properties()
 properties.load(project.rootProject.file('local.properties').newDataInputStream())
 def google_map_key = properties.getProperty('google_map_key')
+def naver_map_client_id = properties.getProperty('client_id')
+def naver_map_client_secret = properties.getProperty('client_secret')
 
 android {
     compileSdk 33
@@ -15,7 +17,11 @@ android {
         targetSdk 33
         versionCode 1
         versionName "1.0"
-        manifestPlaceholders= [googleMapKey: google_map_key]
+        manifestPlaceholders= [
+                googleMapKey: google_map_key,
+                naverClientId: naver_map_client_id,
+                naverClientSecret: naver_map_client_secret
+        ]
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
@@ -47,6 +53,8 @@ android {
             excludes += '/META-INF/{AL2.0,LGPL2.1}'
         }
     }
+
+    configurations { implementation.exclude group: 'androidx.appcompat', module: 'appcompat-resources' }
 }
 
 dependencies {
@@ -72,6 +80,14 @@ dependencies {
     // Optionally, you can include the widgets library if you want to use ScaleBar, etc.
     implementation 'com.google.maps.android:maps-compose-widgets:2.7.2'
 
+    implementation 'io.github.fornewid:naver-map-compose:1.2.1'
+
+    // NAVER Map Android SDK 최신 버전도 포함해야 합니다.
+    implementation ('com.naver.maps:map-sdk:3.15.0')
+
+    // FusedLocationSource를 사용하려면 play-services-location 의존성도 추가해야 합니다.
+    implementation 'com.google.android.gms:play-services-location:21.0.0'
+
     // compose viewpager
     implementation "com.google.accompanist:accompanist-pager:0.20.1"
     implementation "com.google.accompanist:accompanist-pager-indicators:0.20.1"
@@ -80,4 +96,7 @@ dependencies {
     // Coil
     implementation "io.coil-kt:coil-compose:2.1.0"
     implementation "io.coil-kt:coil-gif:2.1.0"
+
+    // compose permission
+    implementation "com.google.accompanist:accompanist-permissions:0.27.0"
 }

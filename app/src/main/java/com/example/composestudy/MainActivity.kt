@@ -13,6 +13,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import com.example.composestudy.constraint.ConstraintTest
+import com.example.composestudy.constraint.ConstraintTest2
 import com.example.composestudy.effect.LaunchedEffectTest
 import com.example.composestudy.map.NaverMapTest
 import com.example.composestudy.map.NaverMapTest2
@@ -38,7 +40,9 @@ class MainActivity : ComponentActivity() {
 //                    LaunchedEffectTest()
 //                    GoogleMapTest()
 //                    NaverMapTest()
-                    NaverMapTest2()
+//                    NaverMapTest2()
+//                    ConstraintTest()
+                    ConstraintTest2()
                 }
             }
         }

@@ -1,0 +1,53 @@
+{
+  ConstraintSets: {
+    start: {
+      box: {
+        top: ['parent', 'top', 150],
+        bottom: ['parent', 'bottom'],
+        start: ['parent' , 'start', 20],
+        custom: {
+          background: "#84FFFF"
+        }
+      },
+      button: {
+        width: "parent",
+        start: ['parent', 'start', 20],
+        end: ['parent', 'end', 20],
+        bottom: ['parent', 'bottom', 30]
+      }
+    },
+    end: {
+      box: {
+        top: ['parent', 'top', 30],
+        bottom: ['parent', 'bottom'],
+        end: ['parent' , 'end', 20],
+        custom: {
+          background: "#FF9E80"
+        }
+      },
+      button: {
+        width: "parent",
+        start: ['parent', 'start', 20],
+        end: ['parent', 'end', 20],
+        bottom: ['parent', 'bottom', 30]
+      }
+    }
+  },
+  Transitions: {
+    default: {
+      from: 'start',
+      to: 'end',
+      pathMotionArc: 'startHorizontal',
+      KeyFrames: {
+        KeyAttributes: [
+          {
+            target: ['box'],
+            frames: [0, 50, 100],
+            heihgt: 150,
+            translationY: [0, -200, 0]
+          }
+        ]
+      }
+    }
+  },
+}

@@ -19,6 +19,7 @@ import com.example.composestudy.effect.LaunchedEffectTest
 import com.example.composestudy.map.NaverMapTest
 import com.example.composestudy.map.NaverMapTest2
 import com.example.composestudy.motion.MotionLayoutTest
+import com.example.composestudy.motion.MotionLayoutTest2
 import com.example.composestudy.ui.theme.ComposeStudyTheme
 
 class MainActivity : ComponentActivity() {
@@ -44,7 +45,8 @@ class MainActivity : ComponentActivity() {
 //                    NaverMapTest2()
 //                    ConstraintTest()
 //                    ConstraintTest2()
-                    MotionLayoutTest()
+//                    MotionLayoutTest()
+                    MotionLayoutTest2()
                 }
             }
         }

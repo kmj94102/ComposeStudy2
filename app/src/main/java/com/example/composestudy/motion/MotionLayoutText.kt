@@ -1,10 +1,16 @@
 package com.example.composestudy.motion
 
+import android.util.Log
+import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.animation.core.animateIntAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
@@ -15,6 +21,7 @@ import androidx.compose.material.icons.outlined.ThumbUp
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.layout.layoutId
@@ -25,10 +32,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.constraintlayout.compose.ConstraintSet
-import androidx.constraintlayout.compose.ExperimentalMotionApi
-import androidx.constraintlayout.compose.MotionLayout
-import androidx.constraintlayout.compose.MotionScene
+import androidx.constraintlayout.compose.*
 import com.example.composestudy.R
 
 @OptIn(ExperimentalMotionApi::class)
@@ -55,7 +59,9 @@ fun MotionLayoutTest() {
     ) {
         val boxProperties = motionProperties(id = "box")
         
-        Box(modifier = Modifier.background(Color(0xF383838)).layoutId("bg"))
+        Box(modifier = Modifier
+            .background(Color(0xF383838))
+            .layoutId("bg"))
 
         Box(
             modifier = Modifier
@@ -123,6 +129,7 @@ private fun endConstraintSet(): ConstraintSet = ConstraintSet(
     """
 )
 
+@OptIn(ExperimentalMotionApi::class)
 @Composable
 private fun myMotionScene() = MotionScene(
     """
@@ -195,7 +202,10 @@ fun MotionLayoutTest2() {
         Box(
             modifier = Modifier
                 .fillMaxHeight()
-                .background(Color.White, shape = RoundedCornerShape(topStart = corners, topEnd = corners))
+                .background(
+                    Color.White,
+                    shape = RoundedCornerShape(topStart = corners, topEnd = corners)
+                )
                 .layoutId("contentBg")
         )
 
@@ -285,7 +295,8 @@ fun MotionLayoutTest2() {
                     "You can leave the strawberry cake at room temperature for up to 5 days if you keep it covered. You can also store the cake in the fridge.\n" +
                     "\nYou can freeze fully frosted or unfrosted cake for up to 2 months. Wrap the cake tightly in a layer of plastic wrap and then tin foil before freezing.\n\n" +
                     "Let the cake thaw overnight in the refrigerator, then bring to room temperature before serving.",
-            modifier = Modifier.fillMaxHeight()
+            modifier = Modifier
+                .fillMaxHeight()
                 .layoutId("text")
                 .padding(horizontal = 16.dp),
             fontSize = 12.sp,
@@ -306,5 +317,97 @@ fun MotionLayoutTest2() {
         }
 
 
+    }
+}
+
+@OptIn(ExperimentalMotionApi::class)
+@Composable
+fun MotionLayoutTest3() {
+    val context = LocalContext.current
+    val scene = remember {
+        context.resources
+            .openRawResource(R.raw.player)
+            .readBytes()
+            .decodeToString()
+    }
+
+    var isDetail by remember { mutableStateOf(false) }
+    val progress by animateFloatAsState(
+        targetValue = if (isDetail) 1f else 0f,
+        animationSpec = tween(1000)
+    )
+
+    MotionLayout(
+        motionScene = MotionScene(content = scene),
+        progress = progress
+    ) {
+        /** 배경 **/
+        Box(
+            modifier = Modifier
+                .background(Color(0xFF282828))
+                .layoutId("background")
+        )
+        /** 이미지 **/
+        Image(
+            painter = painterResource(id = R.drawable.ic_launcher_background),
+            contentDescription = "image",
+            contentScale = ContentScale.Crop,
+            modifier = Modifier.layoutId("image")
+        )
+        /** 타이틀 **/
+        Text(
+            text = "제목이 들어갑니다.",
+            fontSize = 16.sp,
+            fontWeight = FontWeight.Bold,
+            color = Color.White,
+            modifier = Modifier.layoutId("title")
+        )
+        /** 서브 타이틀 **/
+        Text(
+            text = "[서브 내용]",
+            fontSize = 12.sp,
+            color = Color(0xFFB9B9B9),
+            modifier = Modifier.layoutId("subTitle")
+        )
+        /** 재생버튼 라운드 **/
+        Box(modifier = Modifier
+            .clip(CircleShape)
+            .background(Color(0xFF656565))
+            .layoutId("playBg")
+        )
+        /** 재생버튼 **/
+        Image(
+            painter = painterResource(id = R.drawable.ic_play),
+            contentDescription = "play",
+            modifier = Modifier
+                .layoutId("play")
+        )
+        /** 다음 버튼 **/
+        Image(
+            painter = painterResource(id = R.drawable.ic_next),
+            contentDescription = "next",
+            modifier = Modifier
+                .layoutId("next")
+        )
+        /** 이전 버튼 **/
+        Image(
+            painter = painterResource(id = R.drawable.ic_prev),
+            contentDescription = "prev",
+            modifier = Modifier
+                .layoutId("prev")
+        )
+        /** 축소 버튼 **/
+        Image(
+            painter = painterResource(id = R.drawable.ic_arrow_down),
+            contentDescription = "down",
+            modifier = Modifier
+                .layoutId("down")
+                .clickable(
+                    interactionSource = remember { MutableInteractionSource() },
+                    indication = null
+                ) {
+                    isDetail = false
+                }
+        )
     }
 }

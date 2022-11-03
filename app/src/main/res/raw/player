@@ -1,0 +1,151 @@
+{
+  ConstraintSets: {
+    start: {
+      background: {
+        bottom: ['parent', 'bottom', 0],
+        start: ['parent', 'start', 0],
+        end: ['parent', 'end', 0],
+        width: 'parent',
+        height: 64,
+      },
+      image: {
+        top: ['background', 'top', 0],
+        bottom: ['background', 'bottom', 0],
+        start: ['background', 'start', 0],
+        width: 90,
+        height: 'spread'
+      },
+      title: {
+        top: ['background', 'top', 12],
+        bottom: ['subTitle', 'top', 0],
+        start: ['image', 'end', 10],
+        end: ['play', 'start', 10],
+        width: 'spread',
+        height: 'wrap',
+      },
+      subTitle: {
+        top: ['title', 'bottom', 5],
+        bottom: ['background', 'bottom', 12],
+        start: ['title', 'start', 0],
+        end: ['title', 'end', 0],
+        width: 'spread',
+        height: 'wrap',
+      },
+      play: {
+        top: ['background', 'top', 0],
+        bottom: ['background', 'bottom', 0],
+        end: ['next', 'start', 10],
+        width: 24,
+        height: 24
+      },
+      playBg: {
+        top: ['play', 'top', 0],
+        bottom: ['play', 'bottom', 0],
+        start: ['play', 'start', 0],
+        end: ['play', 'end', 0],
+        width: 24,
+        height: 24,
+        visibility: 'gone'
+      },
+      next: {
+        top: ['background', 'top', 0],
+        bottom: ['background', 'bottom', 0],
+        end: ['background', 'end', 20],
+        width: 24,
+        height: 24
+      },
+      prev: {
+        top: ['play', 'top', 0],
+        bottom: ['play', 'bottom', 0],
+        end: ['play', 'start', 0],
+        width: 0,
+        height: 0
+      },
+      down: {
+        top: ['parent', 'top', 0],
+        start: ['parent', 'start', 0],
+        width: 0,
+        height: 0
+      }
+    },
+
+    end: {
+      background: {
+        top: ['parent', 'top', 0],
+        bottom: ['parent', 'bottom', 0],
+        start: ['parent', 'start', 0],
+        end: ['parent', 'end', 0],
+        width: 'parent',
+        height: 'parent'
+      },
+      image: {
+        top: ['parent', 'top', 42],
+        start: ['parent', 'start', 0],
+        end: ['parent', 'end', 0],
+        width: 'parent',
+        height: 300
+      },
+      title: {
+        top: ['image', 'bottom', 25],
+        start: ['parent', 'start', 0],
+        end: ['parent', 'end', 0],
+        scaleX: 1.6,
+        scaleY: 1.6
+      },
+      subTitle: {
+        top: ['title', 'bottom', 10],
+        start: ['parent', 'start', 0],
+        end: ['parent', 'end', 0],
+        scaleX: 1.3,
+        scaleY: 1.3
+      },
+      play: {
+        top: ['subTitle', 'bottom', 50],
+        start: ['parent', 'start', 0],
+        end: ['parent', 'end', 0],
+        width: 50,
+        height: 50
+      },
+      playBg: {
+        top: ['play', 'top', 0],
+        bottom: ['play', 'bottom', 0],
+        start: ['play', 'start', 0],
+        end: ['play', 'end', 0],
+        width: 70,
+        height: 70
+      },
+      next: {
+        top: ['play', 'top', 0],
+        bottom: ['play', 'bottom', 0],
+        start: ['play', 'end', 50],
+        width: 50,
+        height: 50
+      },
+      prev: {
+        top: ['play', 'top', 0],
+        bottom: ['play', 'bottom', 0],
+        end: ['play', 'start', 50],
+        width: 50,
+        height: 50
+      },
+      down: {
+        top: ['parent', 'top', 0],
+        bottom: ['image', 'top', 0],
+        start: ['parent', 'start', 15],
+        width: 24,
+        height: 24
+      }
+    }
+  },
+  Transitions: {
+    default: {
+      from: 'start',
+      to: 'end',
+      onSwipe: {
+        anchor: 'background',
+        direction: 'up',
+        side: 'top',
+      },
+    }
+  }
+}

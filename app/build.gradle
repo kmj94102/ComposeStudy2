@@ -99,4 +99,7 @@ dependencies {
 
     // compose permission
     implementation "com.google.accompanist:accompanist-permissions:0.27.0"
+
+    // Code Scanner - https://github.com/yuriy-budiyev/code-scanner
+    implementation 'com.github.yuriy-budiyev:code-scanner:2.3.2'
 }
